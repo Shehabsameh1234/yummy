@@ -7,8 +7,12 @@ let sideBarAnimation = document.querySelectorAll("#offcanvas ul a")
 let categoryRow = document.getElementById("row-category")
 let areaRow = document.getElementById("row-area")
 let IngredientsRow = document.getElementById("row-Ingredients")
-let itemsRow = document.getElementById("row-items")
-let itemDetails = document.getElementById("row-items-details")
+let itemsRow = document.getElementById("row-items-category")
+let itemDetails = document.getElementById("row-items-details-category")
+let tagsCategory  =document.getElementById("tags-category")
+let IngredientDetailsCategory  =document.getElementById("Ingredient-details-category")
+let itemsHome  =document.getElementById("row-items-home")
+
 // global var 
 
 // loading spiner
@@ -66,52 +70,6 @@ async function categories() {
 categories()
 // categories
 
-
-// areas name
-async function areasName() {
-    let myAreaName = await fetch("https://www.themealdb.com/api/json/v1/1/list.php?a=list").catch(error => console.log(error))
-    let myAreaNameData = await myAreaName.json()
-    let temp = "";
-    // dispaly areas in html
-    for (var i = 0; i < myAreaNameData.meals.length; i++) {
-        temp += `       <div class="col-md-3 col-12 mb-5 " >
-    <img src="img/home (2).png" class="w-50" alt=" home area ">
-    <h3>`+ myAreaNameData.meals[i].strArea + `</h3>
-</div>`
-    }
-    areaRow.innerHTML = temp
-    // display areas in html
-
-}
-areasName()
-// areas name
-
-
-
-// Ingredients
-async function Ingredients() {
-    let myIngredientsName = await fetch("https://www.themealdb.com/api/json/v1/1/list.php?i=list").catch(error => console.log(error))
-    let myIngredientsData = await myIngredientsName.json()
-
-    let temp = "";
-    // dispaly Ingredients in html
-    for (var i = 0; i < 20; i++) {
-        temp += `     <div class="col-md-3 col-12 px-2  ">
-    <img src="img/chicken-leg.png" class="w-50" alt=" Ingredients  ">
-    <h4>`+ myIngredientsData.meals[i].strIngredient + `</h4>
-    <h6>`+ myIngredientsData.meals[i].strDescription.slice(0, 150) + `</h6>
-</div>   `
-    }
-    IngredientsRow.innerHTML = temp
-
-    // display Ingredients in html
-}
-Ingredients()
-// Ingredients
-
-
-
-
 // get data from category
 async function filterCtegory(categoryNme) {
 
@@ -141,9 +99,10 @@ async function filterCtegory(categoryNme) {
     itemsRow.innerHTML = temp
     // display category data in html
 }
+
+
+
 // get data from category
-
-
 async function getMealData(id) {
 
     let myMealDetails = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`).catch(error => console.log(error))
@@ -159,13 +118,12 @@ async function getMealData(id) {
     let tagNmeLength = tagNmae.split(",").length
 
 
-
     // display tag name in html
     let temp = "";
     for (var i = 0; i < tagNmeLength; i++) {
         temp += `<span class="p-2 rounded bg-danger text-white me-1 mb-3">` + tagNmae.split(",")[i] + `</span> `
     }
-    document.getElementById("tags").innerHTML = temp
+    tagsCategory.innerHTML = temp
     // display tag name in html
 
     // display meal Ingredient in html
@@ -173,11 +131,11 @@ async function getMealData(id) {
     for (var i = 1; i < 20; i++) {
         if (myMealData.meals[0][`strIngredient${i}`] != "" && myMealData.meals[0][`strMeasure${i}`] != "") {
             temp2 += `
-            <span id="sss" class="p-2 me-1 mb-3"> `+ myMealData.meals[0][`strMeasure${i}`] + " " + myMealData.meals[0][`strIngredient${i}`] + `   </span>
+            <span  class="p-2 me-1 mb-3"> `+ myMealData.meals[0][`strMeasure${i}`] + " " + myMealData.meals[0][`strIngredient${i}`] + `   </span>
             `
         }
     }
-    document.getElementById("Ingredient-details").innerHTML = temp2
+    IngredientDetailsCategory.innerHTML = temp2
     // display meal Ingredient in html
 
     // display details data in html
@@ -221,6 +179,121 @@ function getCategory() {
     }
 }
 // click on category ancor to get categories
+
+
+
+
+
+
+
+// home page
+async function homePage(){
+
+    let myhomePageUrl= await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=`).catch(error=>console.log(error))
+    let myHomeData= await myhomePageUrl.json()
+
+// display data in home page
+    temp =""
+    for(var i =0;i<20;i++){
+        temp+=`
+        <div id=`+myHomeData.meals[i].idMeal+` class="col-md-3 col-12">
+        <div id=`+myHomeData.meals[i].idMeal+`  class="position-relative m-2 ">
+            <img id=`+myHomeData.meals[i].idMeal+` src=`+myHomeData.meals[i].strMealThumb+` class="w-100" alt="items category">
+            <div id=`+myHomeData.meals[i].idMeal+` class="layer">
+                <h5 id=`+myHomeData.meals[i].idMeal+` class="text-start">`+myHomeData.meals[i].strMeal+`</h5>
+            </div>
+        </div>
+    </div>
+        `
+    }
+    itemsHome.innerHTML=temp
+// display data in home page
+
+
+}
+homePage()
+// home page
+
+
+
+
+itemsHome.addEventListener("click", function (e) {
+    console.log(e.target.id);
+ 
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// areas name
+async function areasName() {
+    let myAreaName = await fetch("https://www.themealdb.com/api/json/v1/1/list.php?a=list").catch(error => console.log(error))
+    let myAreaNameData = await myAreaName.json()
+    let temp = "";
+    // dispaly areas in html
+    for (var i = 0; i < myAreaNameData.meals.length; i++) {
+        temp += `       <div class="col-md-3 col-12 mb-5 " >
+    <img src="img/home (2).png" class="w-50" alt=" home area ">
+    <h3>`+ myAreaNameData.meals[i].strArea + `</h3>
+</div>`
+    }
+    areaRow.innerHTML = temp
+    // display areas in html
+
+}
+areasName()
+// areas name
+
+// Ingredients
+async function Ingredients() {
+    let myIngredientsName = await fetch("https://www.themealdb.com/api/json/v1/1/list.php?i=list").catch(error => console.log(error))
+    let myIngredientsData = await myIngredientsName.json()
+
+    let temp = "";
+    // dispaly Ingredients in html
+    for (var i = 0; i < 20; i++) {
+        temp += `     <div class="col-md-3 col-12 px-2  ">
+    <img src="img/chicken-leg.png" class="w-50" alt=" Ingredients  ">
+    <h4>`+ myIngredientsData.meals[i].strIngredient + `</h4>
+    <h6>`+ myIngredientsData.meals[i].strDescription.slice(0, 150) + `</h6>
+</div>   `
+    }
+    IngredientsRow.innerHTML = temp
+
+    // display Ingredients in html
+}
+Ingredients()
+// Ingredients
+
 
 
 
