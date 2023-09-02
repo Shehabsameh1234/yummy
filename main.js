@@ -9,9 +9,12 @@ let areaRow = document.getElementById("row-area")
 let IngredientsRow = document.getElementById("row-Ingredients")
 let itemsRow = document.getElementById("row-items-category")
 let itemDetails = document.getElementById("row-items-details-category")
-let tagsCategory  =document.getElementById("tags-category")
-let IngredientDetailsCategory  =document.getElementById("Ingredient-details-category")
-let itemsHome  =document.getElementById("row-items-home")
+let tagsCategory = document.getElementById("tags-category")
+let IngredientDetailsCategory = document.getElementById("Ingredient-details-category")
+let itemsHome = document.getElementById("row-items-home")
+let itemDetailsHome = document.getElementById("row-items-details-home")
+let homeTags = document.getElementById("tags-home")
+let  IngredientDetailsHome= document.getElementById("Ingredient-details-home")
 
 // global var 
 
@@ -109,7 +112,7 @@ async function getMealData(id) {
 
     let myMealData = await myMealDetails.json()
 
-   
+
     let tagNmae = myMealData.meals[0].strTags
     // get tag name and if it == null write no tag
     if (tagNmae == null) {
@@ -120,25 +123,34 @@ async function getMealData(id) {
 
     // display tag name in html
     let temp = "";
+    let tempHome = ""
     for (var i = 0; i < tagNmeLength; i++) {
         temp += `<span class="p-2 rounded bg-danger text-white me-1 mb-3">` + tagNmae.split(",")[i] + `</span> `
+        tempHome += `<span class="p-2 rounded bg-danger text-white me-1 mb-3">` + tagNmae.split(",")[i] + `</span> `
     }
+
     tagsCategory.innerHTML = temp
+    homeTags.innerHTML = tempHome
     // display tag name in html
 
     // display meal Ingredient in html
     let temp2 = ""
+    let tempHome1=""
     for (var i = 1; i < 20; i++) {
         if (myMealData.meals[0][`strIngredient${i}`] != "" && myMealData.meals[0][`strMeasure${i}`] != "") {
             temp2 += `
             <span  class="p-2 me-1 mb-3"> `+ myMealData.meals[0][`strMeasure${i}`] + " " + myMealData.meals[0][`strIngredient${i}`] + `   </span>
             `
+            tempHome1 += `
+            <span  class="p-2 me-1 mb-3"> `+ myMealData.meals[0][`strMeasure${i}`] + " " + myMealData.meals[0][`strIngredient${i}`] + `   </span>
+            `
         }
     }
     IngredientDetailsCategory.innerHTML = temp2
+    IngredientDetailsHome.innerHTML = tempHome1
     // display meal Ingredient in html
 
-    // display details data in html
+    // display category item details data in html
     document.getElementById("meal-name").innerHTML = myMealData.meals[0].strMeal
     document.getElementById("item-category-name").innerHTML = myMealData.meals[0].strCategory
     document.getElementById("item-img-details").setAttribute("src", myMealData.meals[0].strMealThumb)
@@ -146,7 +158,19 @@ async function getMealData(id) {
     document.getElementById("meal-area").innerHTML = "Area : " + myMealData.meals[0].strArea
     document.getElementById("youtube-link").setAttribute("href", myMealData.meals[0].strYoutube)
     document.getElementById("source").setAttribute("href", myMealData.meals[0].strSource)
-    // display details data in html
+    // display category item details data in html
+
+
+    // display home  item details data in html
+    document.getElementById("meal-name-home").innerHTML = myMealData.meals[0].strMeal
+    document.getElementById("item-home-name").innerHTML = myMealData.meals[0].strCategory
+    document.getElementById("item-img-details-home").setAttribute("src", myMealData.meals[0].strMealThumb)
+    document.getElementById("meal-desc-home").innerHTML = myMealData.meals[0].strInstructions
+    document.getElementById("meal-area-home").innerHTML = "Area : " + myMealData.meals[0].strArea
+    document.getElementById("youtube-link-home").setAttribute("href", myMealData.meals[0].strYoutube)
+    document.getElementById("source-home").setAttribute("href", myMealData.meals[0].strSource)
+    // display  home item details data in html
+
 }
 
 
@@ -181,78 +205,39 @@ function getCategory() {
 // click on category ancor to get categories
 
 
-
-
-
-
-
 // home page
-async function homePage(){
+async function homePage() {
+    let myhomePageUrl = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=`).catch(error => console.log(error))
+    let myHomeData = await myhomePageUrl.json()
 
-    let myhomePageUrl= await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=`).catch(error=>console.log(error))
-    let myHomeData= await myhomePageUrl.json()
-
-// display data in home page
-    temp =""
-    for(var i =0;i<20;i++){
-        temp+=`
-        <div id=`+myHomeData.meals[i].idMeal+` class="col-md-3 col-12">
-        <div id=`+myHomeData.meals[i].idMeal+`  class="position-relative m-2 ">
-            <img id=`+myHomeData.meals[i].idMeal+` src=`+myHomeData.meals[i].strMealThumb+` class="w-100" alt="items category">
-            <div id=`+myHomeData.meals[i].idMeal+` class="layer">
-                <h5 id=`+myHomeData.meals[i].idMeal+` class="text-start">`+myHomeData.meals[i].strMeal+`</h5>
+    // display data in home page
+    temp = ""
+    for (var i = 0; i < 20; i++) {
+        temp += `
+        <div id=`+ myHomeData.meals[i].idMeal + ` class="col-md-3 col-12">
+        <div id=`+ myHomeData.meals[i].idMeal + `  class="position-relative m-2 ">
+            <img id=`+ myHomeData.meals[i].idMeal + ` src=` + myHomeData.meals[i].strMealThumb + ` class="w-100" alt="items category">
+            <div id=`+ myHomeData.meals[i].idMeal + ` class="layer">
+                <h5 id=`+ myHomeData.meals[i].idMeal + ` class="text-start">` + myHomeData.meals[i].strMeal + `</h5>
             </div>
         </div>
     </div>
         `
     }
-    itemsHome.innerHTML=temp
-// display data in home page
-
+    itemsHome.innerHTML = temp
+    // display data in home page
 
 }
 homePage()
 // home page
 
-
-
-
+// send the id item to homePage() to get data 
 itemsHome.addEventListener("click", function (e) {
-    console.log(e.target.id);
- 
+    getMealData(e.target.id)
+    this.style.display = "none"
+    itemDetailsHome.classList.remove("d-none")
 })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// send the id item to homePage() to get data 
 
 // areas name
 async function areasName() {

@@ -306,7 +306,9 @@ i {
 
 
 
-#row-items-details-category .flex-wrap  span {
+#row-items-details-home .flex-wrap  span,
+#row-items-details-category .flex-wrap  span
+ {
   background-color: #cff4fc;
   display: inline-block;
   color: black;
@@ -317,3 +319,5 @@ i {
   -ms-border-radius: 8px;
   -o-border-radius: 8px;
 }
+
+
