@@ -547,7 +547,6 @@ inputSearchFirst.addEventListener("keyup", function () {
 })
 // sent the first letter to searchLetter()
 
-
 // send the id item to getMealData() to get data 
 itemsSearch.addEventListener("click", function (e) {
     getMealData(e.target.id)
@@ -557,7 +556,6 @@ itemsSearch.addEventListener("click", function (e) {
     itemDetailsiSearch.classList.remove("d-none")
 })
 // send the id item to getMealData() to get data 
-
 
 // click on search ancor to get search page 
 function getSearch() {
@@ -572,9 +570,6 @@ function getSearch() {
     }
 }
 // click on search ancor to get search page
-
-
-
 
 // var
 let inputName = document.getElementById("input-name")
@@ -600,8 +595,6 @@ var validAge=/^[1-9]?[0-9]{1}$|^100$/;
 var validpass = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
 
 // validation regex
-
-
 
 // name validation
 inputName.addEventListener("keyup",function(){
@@ -669,10 +662,17 @@ inputRepassword.addEventListener("keyup",function(){
 })
 // repassword validation
 
-
-
-function shehab(){
-    
+// make btn enabled
+function makeButtonEnabled(){
+   if(validpass.test(inputPassword.value)==true&&validAge.test(inputAge.value)==true&&validNumber.test(inputNumber.value)==true&&
+   validEmail.test(inputEmail.value)==true&&validName.test(inputName.value) ==true&&inputRepassword.value == inputPassword.value )
+      {
+    btnContactUs.removeAttribute("disabled")
+   }else{
+    btnContactUs.setAttribute("disabled","")
+   }
 }
+// make btn enabled
+
 
 

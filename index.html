@@ -11,13 +11,11 @@
     <script src="bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="bootstrap-5.0.2-dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="style.css">
- 
 </head>
 
 <body>
-
     <!-- loading spiner -->
-    <!-- <div id="loading" class="justify-content-center align-items-center">
+    <div id="loading" class="justify-content-center align-items-center">
         <div class="lds-roller">
             <div></div>
             <div></div>
@@ -28,9 +26,8 @@
             <div></div>
             <div></div>
         </div>
-    </div> -->
+    </div>
     <!-- loading spiner -->
-
 
     <!-- sideleft bar -->
     <div>
@@ -92,16 +89,12 @@
 
     <!-- navs and tabs -->
     <div class="tab-content " id="pills-tabContent">
-
         <!-- home and default page -->
-        <div class="tab-pane fade    " id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0">
+        <div class="tab-pane fade  active show    " id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0">
             <div class="container w-75 ">
-
                 <!-- this dav contains items of home -->
                 <div id="row-items-home" class="row mt-3  ms-4 g-0 ">
-
                 </div>
-
                 <!-- this dav contains  items details and Ingredients  -->
                 <div id="row-items-details-home" class="row d-none mt-3  ms-4 g-0 ">
                     <div class="col-md-4 col-12">
@@ -141,7 +134,6 @@
             </div>
         </div>
         <!-- home and default page -->
-
 
         <!-- search page  -->
         <div class="tab-pane fade    " id="pills-search" role="tabpanel" aria-labelledby="pills-search-tab"
@@ -207,10 +199,6 @@
         </div>
         <!-- search page  -->
 
-
-
-
-
         <!-- category page -->
         <div class="tab-pane fade  " id="pills-Categories" role="tabpanel" aria-labelledby="pills-Categories-tab"
             tabindex="0">
@@ -261,8 +249,6 @@
             </div>
         </div>
         <!-- category page -->
-
-
 
         <!-- area page -->
         <div class="tab-pane fade  " id="pills-Area" role="tabpanel" aria-labelledby="pills-Area-tab" tabindex="0">
@@ -366,56 +352,44 @@
         </div>
         <!-- iIngredients page -->
 
-
-
-
-
         <!-- contant us page -->
-        <div class="tab-pane fade  active show" id="pills-ContactUs" role="tabpanel"
+        <div class="tab-pane fade" id="pills-ContactUs" role="tabpanel"
             aria-labelledby="pills-ContactUs-tab" tabindex="0">
             <form class="contact-us">
                 <div class="row g-0 ">
                     <div class="col-md-6 col-12">
-                        <input id="input-name" placeholder="enter your name" type="text">
+                        <input onkeyup=" makeButtonEnabled()" id="input-name" placeholder="enter your name" type="text">
                         <p class="d-none" id="p-input-name">Special characters and numbers not allowed , atleast 3 charac</p>
                     </div>
                     <div class="col-md-6 col-12">
-                        <input id="input-email" placeholder="enter your email" type="email">
+                        <input onkeyup=" makeButtonEnabled()" id="input-email" placeholder="enter your email" type="email">
                         <p class="d-none" id="p-input-email">Email not valid *exemple1234@yyy.zzz</p>
                     </div>
                     <div class="col-md-6 col-12">
-                        <input id="input-number" placeholder="enter your number" type="number">
+                        <input onkeyup=" makeButtonEnabled()" id="input-number" placeholder="enter your number" type="number">
                         <p class="d-none" id="p-input-number">Enter valid Phone Number</p>
                     </div>
                     <div class="col-md-6 col-12">
-                        <input id="input-age" placeholder="enter your age" type="number">
+                        <input onkeyup=" makeButtonEnabled()" id="input-age" placeholder="enter your age" type="number">
                         <p class="d-none" id="p-input-age">Enter valid age</p>
                     </div>
                     <div class="col-md-6 col-12">
-                        <input id="input-password" placeholder="enter your password" type="password">
+                        <input onkeyup=" makeButtonEnabled()" id="input-password" placeholder="enter your password" type="password">
                         <p class="d-none" id="p-input-password">Enter valid password *Minimum eight characters, at least one letter and one number:*</p>
                     </div>
                     <div class="col-md-6 col-12">
-                        <input id="input-repassword" placeholder="repassword" type="password">
+                        <input onkeyup=" makeButtonEnabled()" id="input-repassword" placeholder="repassword" type="password">
                         <p class="d-none" id="p-input-repassword">Enter valid repassword</p>
                     </div>
                 </div>
                <div class="pb-5 text-center">
-                <button id="button-contantUs" class="btn btn-outline-danger " disabled type="button" >submit</button>
+                <button id="button-contantUs" class="btn btn-outline-danger " disabled type="submit" >submit</button>
                </div>
             </form>
         </div>
         <!-- contant us page -->
-
     </div>
     <!-- navs and tabs -->
-
-
-
-
-
-
-
 
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"
         integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
