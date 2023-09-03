@@ -67,7 +67,7 @@ async function categories() {
        <div  id=`+ categoriesData.categories[i].strCategory + ` class="position-relative m-2 ">
            <img  id=`+ categoriesData.categories[i].strCategory + ` src=` + categoriesData.categories[i].strCategoryThumb + ` class="w-100" alt="category">
            <div  id=`+ categoriesData.categories[i].strCategory + `  class="layer">
-               <h3 id=`+ categoriesData.categories[i].strCategory + ` >` + categoriesData.categories[i].strCategory + `</h3>
+               <h5 id=`+ categoriesData.categories[i].strCategory + ` >` + categoriesData.categories[i].strCategory + `</h5>
                <p  id=`+ categoriesData.categories[i].strCategory + ` >` + categoriesData.categories[i].strCategoryDescription + `</p>
             </div>
           </div>
