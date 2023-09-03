@@ -14,15 +14,22 @@ let IngredientDetailsCategory = document.getElementById("Ingredient-details-cate
 let itemsHome = document.getElementById("row-items-home")
 let itemDetailsHome = document.getElementById("row-items-details-home")
 let homeTags = document.getElementById("tags-home")
-let  IngredientDetailsHome= document.getElementById("Ingredient-details-home")
-
+let IngredientDetailsHome = document.getElementById("Ingredient-details-home")
+let  itemsArea=document.getElementById("row-items-area")
+let itemDetailsArea=document.getElementById("row-items-details-area")
+let IngredientDetailsArea =document.getElementById("Ingredient-details-area")
+let areaTags = document.getElementById("tags-area")
 // global var 
+
+
 
 // loading spiner
 $(document).ready(function () {
     $("#loading").fadeOut(4000)
 });
 // loading spiner
+
+
 
 // sideBar
 $(btnCloseSideBar).click(function () {
@@ -42,6 +49,8 @@ $(btnCloseSideBar).click(function () {
     }
 })
 // sideBar
+
+
 
 
 
@@ -73,6 +82,8 @@ async function categories() {
 categories()
 // categories
 
+
+
 // get data from category
 async function filterCtegory(categoryNme) {
 
@@ -102,10 +113,10 @@ async function filterCtegory(categoryNme) {
     itemsRow.innerHTML = temp
     // display category data in html
 }
-
-
-
 // get data from category
+
+
+// get meal data
 async function getMealData(id) {
 
     let myMealDetails = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`).catch(error => console.log(error))
@@ -124,18 +135,23 @@ async function getMealData(id) {
     // display tag name in html
     let temp = "";
     let tempHome = ""
+    let tempArea=""
     for (var i = 0; i < tagNmeLength; i++) {
         temp += `<span class="p-2 rounded bg-danger text-white me-1 mb-3">` + tagNmae.split(",")[i] + `</span> `
         tempHome += `<span class="p-2 rounded bg-danger text-white me-1 mb-3">` + tagNmae.split(",")[i] + `</span> `
+        tempArea += `<span class="p-2 rounded bg-danger text-white me-1 mb-3">` + tagNmae.split(",")[i] + `</span> `
     }
 
     tagsCategory.innerHTML = temp
     homeTags.innerHTML = tempHome
+    areaTags.innerHTML=tempArea
+    
     // display tag name in html
 
     // display meal Ingredient in html
     let temp2 = ""
-    let tempHome1=""
+    let tempHome1 = ""
+    let tempArea1 = ""
     for (var i = 1; i < 20; i++) {
         if (myMealData.meals[0][`strIngredient${i}`] != "" && myMealData.meals[0][`strMeasure${i}`] != "") {
             temp2 += `
@@ -144,10 +160,14 @@ async function getMealData(id) {
             tempHome1 += `
             <span  class="p-2 me-1 mb-3"> `+ myMealData.meals[0][`strMeasure${i}`] + " " + myMealData.meals[0][`strIngredient${i}`] + `   </span>
             `
+            tempArea1 += `
+            <span  class="p-2 me-1 mb-3"> `+ myMealData.meals[0][`strMeasure${i}`] + " " + myMealData.meals[0][`strIngredient${i}`] + `   </span>
+            `
         }
     }
     IngredientDetailsCategory.innerHTML = temp2
     IngredientDetailsHome.innerHTML = tempHome1
+    IngredientDetailsArea.innerHTML = tempArea1
     // display meal Ingredient in html
 
     // display category item details data in html
@@ -171,7 +191,20 @@ async function getMealData(id) {
     document.getElementById("source-home").setAttribute("href", myMealData.meals[0].strSource)
     // display  home item details data in html
 
+    // display area  item details data in html
+    document.getElementById("meal-name-area").innerHTML = myMealData.meals[0].strMeal
+    document.getElementById("item-area-name").innerHTML = myMealData.meals[0].strCategory
+    document.getElementById("item-img-details-area").setAttribute("src", myMealData.meals[0].strMealThumb)
+    document.getElementById("meal-desc-area").innerHTML = myMealData.meals[0].strInstructions
+    document.getElementById("meal-area-area").innerHTML = "Area : " + myMealData.meals[0].strArea
+    document.getElementById("youtube-link-area").setAttribute("href", myMealData.meals[0].strYoutube)
+    document.getElementById("source-area").setAttribute("href", myMealData.meals[0].strSource)
+    // display  area item details data in html
+
 }
+// get meal data
+
+
 
 
 // click on meals to get thier details
@@ -182,6 +215,7 @@ itemsRow.addEventListener("click", function (e) {
     itemDetails.classList.remove("d-none")
 })
 // click on meals to get thier details
+
 
 
 // send the category name to filterCtegory() to get data 
@@ -231,13 +265,17 @@ async function homePage() {
 homePage()
 // home page
 
-// send the id item to homePage() to get data 
+// send the id item to getMealData() to get data 
 itemsHome.addEventListener("click", function (e) {
     getMealData(e.target.id)
     this.style.display = "none"
     itemDetailsHome.classList.remove("d-none")
 })
-// send the id item to homePage() to get data 
+// send the id item to getMealData() to get data 
+
+
+
+
 
 // areas name
 async function areasName() {
@@ -246,10 +284,11 @@ async function areasName() {
     let temp = "";
     // dispaly areas in html
     for (var i = 0; i < myAreaNameData.meals.length; i++) {
-        temp += `       <div class="col-md-3 col-12 mb-5 " >
-    <img src="img/home (2).png" class="w-50" alt=" home area ">
-    <h3>`+ myAreaNameData.meals[i].strArea + `</h3>
-</div>`
+        temp +=
+            ` <div id=` + myAreaNameData.meals[i].strArea + ` class="col-md-3 col-12 mb-5 " >
+    <img id=`+ myAreaNameData.meals[i].strArea + ` src="img/home (2).png" class="w-50" alt=" home area ">
+    <h3 id=`+ myAreaNameData.meals[i].strArea + `>` + myAreaNameData.meals[i].strArea + `</h3>
+     </div>`
     }
     areaRow.innerHTML = temp
     // display areas in html
@@ -257,6 +296,82 @@ async function areasName() {
 }
 areasName()
 // areas name
+
+
+// area items
+async function getDataArea(areaName) {
+    let myAreaDataUrl = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?a=${areaName}`).catch(error => console.log(error))
+    let myAreaData = await myAreaDataUrl.json()
+
+    console.log(myAreaData.meals[0].idMeal);
+
+    // make number of items equal 20
+    if (myAreaData.meals.length > 20) {
+        myAreaData.meals.length = 20
+    }
+    // make number of items equal 20
+
+      // display data in area  page items
+      temp = ""
+      for (var i = 0; i <  myAreaData.meals.length ; i++) {
+          temp += `
+          <div id=`+myAreaData.meals[i].idMeal+`  class="col-md-3 col-12">
+          <div id=`+myAreaData.meals[i].idMeal+`   class="position-relative m-2 ">
+              <img id=`+myAreaData.meals[i].idMeal+`  src=` + myAreaData.meals[i].strMealThumb + ` class="w-100" alt="items area">
+              <div id=`+myAreaData.meals[i].idMeal+`  class="layer">
+                  <h5 id=`+myAreaData.meals[i].idMeal+` class="text-start">`+ myAreaData.meals[i].strMeal+`</h5>
+              </div>
+          </div>
+      </div>
+         `
+      }
+      itemsArea.innerHTML = temp
+      // display data in area  page items
+}
+// area items
+
+
+// send the id item to getDataArea() to get data 
+areaRow.addEventListener("click",function(e){
+getDataArea(e.target.id)
+this.style.display="none"
+itemsArea.classList.remove("d-none")
+})
+// send the id item to getDataArea() to get data 
+
+// click on area ancor to get categories 
+function getarea() {
+    if (areaRow.style.display == "none") {
+        areaRow.style.display = "flex"
+        itemsArea.classList.add("d-none")
+        itemDetailsArea.classList.add("d-none")
+    }
+}
+// click on area ancor to get categories
+
+// send the id item to getMealData() to get data 
+itemsArea.addEventListener("click",function(e){
+    getMealData(e.target.id)
+    itemDetailsArea.classList.remove("d-none")
+    this.style.display="none"
+
+})
+// send the id item to getMealData() to get data 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // Ingredients
 async function Ingredients() {

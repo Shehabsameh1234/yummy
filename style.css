@@ -307,7 +307,8 @@ i {
 
 
 #row-items-details-home .flex-wrap  span,
-#row-items-details-category .flex-wrap  span
+#row-items-details-category .flex-wrap  span,
+#row-items-details-area .flex-wrap span
  {
   background-color: #cff4fc;
   display: inline-block;
