@@ -26,10 +26,9 @@ let IngredientDetailsiIngredients = document.getElementById("Ingredient-details-
 let inputSearchName = document.getElementById("search-name")
 let inputSearchFirst = document.getElementById("search-first")
 let itemsSearch = document.getElementById("row-items-search")
-let searchTags=document.getElementById("tags-search")
-let  IngredientDetailsiSearch=document.getElementById("Ingredient-details-search")
+let searchTags = document.getElementById("tags-search")
+let IngredientDetailsiSearch = document.getElementById("Ingredient-details-search")
 let itemDetailsiSearch = document.getElementById("row-items-details-search")
-
 // global var 
 
 // loading spiner
@@ -129,7 +128,7 @@ async function getMealData(id) {
     let tempHome = ""
     let tempArea = ""
     let tempiIngredients = ""
-    let tempSearch=""
+    let tempSearch = ""
     for (var i = 0; i < tagNmeLength; i++) {
         temp += `<span class="p-2 rounded bg-danger text-white me-1 mb-3">` + tagNmae.split(",")[i] + `</span> `
         tempHome += `<span class="p-2 rounded bg-danger text-white me-1 mb-3">` + tagNmae.split(",")[i] + `</span> `
@@ -142,7 +141,7 @@ async function getMealData(id) {
     homeTags.innerHTML = tempHome
     areaTags.innerHTML = tempArea
     iIngredientsTags.innerHTML = tempiIngredients
-    searchTags.innerHTML=tempSearch
+    searchTags.innerHTML = tempSearch
     // display tag name in html
 
     // display meal Ingredient in html
@@ -150,7 +149,7 @@ async function getMealData(id) {
     let tempHome1 = ""
     let tempArea1 = ""
     let tempiIngredients1 = ""
-    let tempSearch1=""
+    let tempSearch1 = ""
     for (var i = 1; i < 20; i++) {
         if (myMealData.meals[0][`strIngredient${i}`] != "" && myMealData.meals[0][`strMeasure${i}`] != "") {
             temp2 += `
@@ -174,7 +173,7 @@ async function getMealData(id) {
     IngredientDetailsHome.innerHTML = tempHome1
     IngredientDetailsArea.innerHTML = tempArea1
     IngredientDetailsiIngredients.innerHTML = tempiIngredients1
-    IngredientDetailsiSearch.innerHTML=tempSearch1
+    IngredientDetailsiSearch.innerHTML = tempSearch1
     // display meal Ingredient in html
 
     // display category item details data in html
@@ -487,7 +486,7 @@ async function searchName(name) {
              </div>
          </div>
      </div>`
-     }
+    }
     itemsSearch.innerHTML = temp
     // display data in area  search items
 
@@ -568,7 +567,7 @@ function getSearch() {
         itemsSearch.style.display = "none"
         inputSearchFirst.value = ""
         inputSearchName.value = ""
-    itemDetailsiSearch.classList.add("d-none")
+        itemDetailsiSearch.classList.add("d-none")
 
     }
 }
@@ -577,8 +576,103 @@ function getSearch() {
 
 
 
+// var
+let inputName = document.getElementById("input-name")
+let warningName = document.getElementById("p-input-name")
+let inputEmail = document.getElementById("input-email")
+let warningEmail = document.getElementById("p-input-email")
+let inputNumber = document.getElementById("input-number")
+let warningNumber = document.getElementById("p-input-number")
+let inputAge = document.getElementById("input-age")
+let warningAge = document.getElementById("p-input-age")
+let inputPassword = document.getElementById("input-password")
+let warningPassword = document.getElementById("p-input-password")
+let inputRepassword = document.getElementById("input-repassword")
+let warningRepassword = document.getElementById("p-input-repassword")
+let btnContactUs = document.getElementById("button-contantUs")
+// var
+
+// validation regex
+var validName = /^[a-zA-Z ]{3,20}$/;
+var validEmail = /^[\w-\.]+@([a-z]+\.)+[a-z]{2,4}$/;
+var validNumber = /^01[0125][0-9]{8}$/;
+var validAge=/^[1-9]?[0-9]{1}$|^100$/;
+var validpass = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
+
+// validation regex
 
 
 
+// name validation
+inputName.addEventListener("keyup",function(){
+if(validName.test(this.value) ==false){
+    warningName.classList.remove("d-none")
+
+}else{
+    warningName.classList.add("d-none")
+}
+})
+
+// email validation
+inputEmail.addEventListener("keyup",function(){
+    if(validEmail.test(this.value)==false){
+        warningEmail.classList.remove("d-none")
+    }else{
+        warningEmail.classList.add("d-none")
+
+    }
+})
+
+// number validation
+inputNumber.addEventListener("keyup",function(){
+    if(validNumber.test(this.value)==false){
+        warningNumber.classList.remove("d-none")
+    }else{
+        warningNumber.classList.add("d-none")
+
+    }
+})
+
+// age validation
+inputAge.addEventListener("keyup",function(){
+    if(validAge.test(this.value)==false){
+        warningAge.classList.remove("d-none")
+    }else{
+        warningAge.classList.add("d-none")
+
+    }
+})
+// age validation
+
+
+
+// password validation
+inputPassword.addEventListener("keyup",function(){
+    if(validpass.test(this.value)==false){
+        warningPassword.classList.remove("d-none")
+    }else{
+        warningPassword.classList.add("d-none")
+    }
+})
+// password validation
+
+
+// repassword validation
+inputRepassword.addEventListener("keyup",function(){
+    if(this.value == inputPassword.value){
+        warningRepassword.classList.add("d-none")
+      
+    }else{
+        warningRepassword.classList.remove("d-none")
+
+    }
+})
+// repassword validation
+
+
+
+function shehab(){
+    
+}
 
 

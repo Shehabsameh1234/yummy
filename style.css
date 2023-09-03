@@ -326,16 +326,7 @@ i {
 
 
 .contact-us{
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%,-50%);
-  -webkit-transform: translate(-50%,-50%);
-  -moz-transform: translate(-50%,-50%);
-  -ms-transform: translate(-50%,-50%);
-  -o-transform: translate(-50%,-50%);
-
-
+padding: 150px;
 }
 
 .contact-us input{
@@ -350,7 +341,7 @@ i {
 }
 
 .contact-us p{
-width: 93%;
+width: 95%;
 text-align: center;
 margin-left: 17px;
   background-color: #f8d7da;
@@ -360,20 +351,16 @@ margin-left: 17px;
   -moz-border-radius: 4px;
   -ms-border-radius: 4px;
   -o-border-radius: 4px;
-
-}
-
-.contact-us button{
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  -webkit-transform: translateX(-50%);
-  -moz-transform: translateX(-50%);
-  -ms-transform: translateX(-50%);
-  -o-transform: translateX(-50%);
 }
 
 
+@media (min-width:0)and (max-width: 700px) {
+  .contact-us{
+    padding: 40px;
+    margin-left: 20px;
+    }
+   
+}
 
 
 
