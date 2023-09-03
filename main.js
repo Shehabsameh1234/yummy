@@ -381,20 +381,23 @@ async function Ingredients() {
     let temp = "";
     // dispaly Ingredients in html
     for (var i = 0; i < 20; i++) {
-        temp += `     <div class="col-md-3 col-12 px-2  ">
-    <img src="img/chicken-leg.png" class="w-50" alt=" Ingredients  ">
-    <h4>`+ myIngredientsData.meals[i].strIngredient + `</h4>
-    <h6>`+ myIngredientsData.meals[i].strDescription.slice(0, 150) + `</h6>
+        temp += ` <div   id=`+ myIngredientsData.meals[i].strIngredient + `     class="col-md-3 col-12 px-2  ">
+    <img id=`+ myIngredientsData.meals[i].strIngredient + `  src="img/chicken-leg.png" class="w-50 " alt=" Ingredients  ">
+    <h4 id=`+ myIngredientsData.meals[i].strIngredient + ` >`+ myIngredientsData.meals[i].strIngredient + `</h4>
+    <h6 id=`+ myIngredientsData.meals[i].strIngredient + ` >`+ myIngredientsData.meals[i].strDescription.slice(0, 150) + `</h6>
 </div>   `
     }
     IngredientsRow.innerHTML = temp
-
     // display Ingredients in html
 }
 Ingredients()
 // Ingredients
 
 
+// Ingredients items
+async function getDataIngredients(IngredientsName) {
+    let myIngredientsDataUrl = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${IngredientsName}`).catch(error => console.log(error))
+    let myIngredientsData = await myIngredientsDataUrl.json()
 
 
 
@@ -402,6 +405,46 @@ Ingredients()
 
 
 
+    // // make number of items equal 20
+    // if (myIngredientsData.meals.length > 20) {
+    //     myIngredientsData.meals.length = 20
+    // }
+    // // make number of items equal 20
+
+    //   // display data in Ingredients  page items
+    //   temp = ""
+    //   for (var i = 0; i <  myIngredientsData.meals.length ; i++) {
+    //       temp += `
+    //       <div id=`+myIngredientsData.meals[i].idMeal+`  class="col-md-3 col-12">
+    //       <div id=`+myIngredientsData.meals[i].idMeal+`   class="position-relative m-2 ">
+    //           <img id=`+myIngredientsData.meals[i].idMeal+`  src=` + myIngredientsData.meals[i].strMealThumb + ` class="w-100" alt="items Ingredients">
+    //           <div id=`+myIngredientsData.meals[i].idMeal+`  class="layer">
+    //               <h5 id=`+myIngredientsData.meals[i].idMeal+` class="text-start">`+ myIngredientsData.meals[i].strMeal+`</h5>
+    //           </div>
+    //       </div>
+    //   </div>
+    //      `
+    //   }
+    //   itemsIngredients.innerHTML = temp
+    //   // display data in Ingredients  page items
+}
+// Ingredients items
+
+
+getDataIngredients("Apple Cider Vinegar")
+
+
+
+
+
+
+
+
+IngredientsRow.addEventListener("click",function(e){
+
+    console.log(e.target.innerHTML);
+
+})
 
 
 
