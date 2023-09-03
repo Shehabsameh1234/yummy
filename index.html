@@ -58,8 +58,9 @@
                             role="tab" aria-controls="pills-Area" aria-selected="false">Area</a>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <a id="pills-Ingredients-tab" data-bs-toggle="pill" data-bs-target="#pills-Ingredients"
-                            role="tab" aria-controls="pills-Ingredients" aria-selected="false">Ingredients</a>
+                        <a onclick="getIngredients()" id="pills-Ingredients-tab" data-bs-toggle="pill"
+                            data-bs-target="#pills-Ingredients" role="tab" aria-controls="pills-Ingredients"
+                            aria-selected="false">Ingredients</a>
                     </li>
                     <li class="nav-item" role="presentation">
                         <a id="pills-ContactUs-tab" data-bs-toggle="pill" data-bs-target="#pills-ContactUs" role="tab"
@@ -93,9 +94,9 @@
     <!-- navs and tabs -->
     <div class="tab-content " id="pills-tabContent">
 
-
         <!-- home and default page -->
-        <div class="tab-pane fade    " id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0">
+        <div class="tab-pane fade  active show   " id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab"
+            tabindex="0">
             <div class="container w-75 ">
 
                 <!-- this dav contains items of home -->
@@ -143,7 +144,6 @@
         </div>
         <!-- home and default page -->
 
-
         <!-- search page  -->
         <div class="tab-pane fade   " id="pills-search" role="tabpanel" aria-labelledby="pills-search-tab" tabindex="0">
             <form class="container w-75 mt-5">
@@ -163,8 +163,6 @@
             </form>
         </div>
         <!-- search page  -->
-
-
 
 
         <!-- category page -->
@@ -221,12 +219,8 @@
 
 
 
-
-
-
         <!-- area page -->
-        <div class="tab-pane fade  " id="pills-Area" role="tabpanel" aria-labelledby="pills-Area-tab"
-            tabindex="0">
+        <div class="tab-pane fade  " id="pills-Area" role="tabpanel" aria-labelledby="pills-Area-tab" tabindex="0">
             <div class="container mt-3 ">
 
 
@@ -239,8 +233,8 @@
                 </div>
 
 
-                  <!-- this dav contains  items details and Ingredients  -->
-                  <div id="row-items-details-area" class="row p-3 ms-5 d-none mt-3   g-0 ">
+                <!-- this dav contains  items details and Ingredients  -->
+                <div id="row-items-details-area" class="row p-3 ms-5 d-none mt-3   g-0 ">
                     <div class="col-md-4 col-12">
                         <div class=" m-2 ">
                             <img id="item-img-details-area" src="" class="w-100" alt="">
@@ -277,7 +271,7 @@
 
 
 
-                
+
 
 
 
@@ -292,18 +286,58 @@
 
 
 
-
-        <div class="tab-pane fade  active show " id="pills-Ingredients" role="tabpanel" aria-labelledby="pills-Ingredients-tab"
+        <!-- iIngredients page -->
+        <div class="tab-pane fade   " id="pills-Ingredients" role="tabpanel" aria-labelledby="pills-Ingredients-tab"
             tabindex="0">
             <div class="container  mt-3 ">
+
+                <!-- this div contains iIngredients name -->
                 <div id="row-Ingredients" class="row ms-4 g-0 p-3 text-center ">
 
                 </div>
+
+                <!-- this dav contains items of iIngredients -->
+                <div id="row-items-Ingredients" class="row   ms-4 g-0 ">
+                </div>
+
+                <!-- this div contains  items details and Ingredients  -->
+                <div id="row-items-details-iIngredients" class="row p-3 ms-5 d-none mt-3   g-0 ">
+                    <div class="col-md-4 col-12">
+                        <div class=" m-2 ">
+                            <img id="item-img-details-iIngredients" src="" class="w-100" alt="">
+                            <div class="mt-3">
+                                <h5 id="meal-name-iIngredients" class="text-start"></h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-8 col-12">
+                        <div class=" m-2 ">
+                            <h3>Instructions</h3>
+                            <p id="meal-desc-iIngredients"></p>
+
+                            <h4 id="meal-iIngredients-iIngredients"></h4>
+                            <h4>Category : <span id="item-iIngredients-name"></span> </h4>
+                            <h4>Recipes :</h4>
+                            <div id="Ingredient-details-iIngredients" class="mt-3 d-flex w-100 flex-wrap   ">
+                            </div>
+                            <div>
+                                <h4 class="mb-3">tags :</h4>
+                                <div id="tags-iIngredients">
+
+                                </div>
+                            </div>
+                            <div class="mt-4">
+                                <button class="btn btn-success"> <a id="source-iIngredients" target="_blank"
+                                        href="#">source</a></button>
+                                <button class="btn btn-danger"> <a id="youtube-link-iIngredients" target="_blank"
+                                        href="#">youtube</a></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-
-
-
+        <!-- iIngredients page -->
 
 
 
@@ -313,6 +347,9 @@
             corporis qui non illo distinctio nam, blanditiis quibusdam placeat necessitatibus sapiente voluptas optio
             fugit assumenda dolor ea!
         </div>
+
+
+        
 
     </div>
     <!-- navs and tabs -->
