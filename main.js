@@ -19,12 +19,16 @@ let itemsArea = document.getElementById("row-items-area")
 let itemDetailsArea = document.getElementById("row-items-details-area")
 let IngredientDetailsArea = document.getElementById("Ingredient-details-area")
 let areaTags = document.getElementById("tags-area")
-let itemsIngredients =document.getElementById("row-items-Ingredients")
+let itemsIngredients = document.getElementById("row-items-Ingredients")
 let itemDetailsiIngredients = document.getElementById("row-items-details-iIngredients")
-let iIngredientsTags=document.getElementById("tags-iIngredients")
-let IngredientDetailsiIngredients=document.getElementById("Ingredient-details-iIngredients")
-let inputSearchName=document.getElementById("search-name")
-let inputSearchFirst=document.getElementById("search-first")
+let iIngredientsTags = document.getElementById("tags-iIngredients")
+let IngredientDetailsiIngredients = document.getElementById("Ingredient-details-iIngredients")
+let inputSearchName = document.getElementById("search-name")
+let inputSearchFirst = document.getElementById("search-first")
+let itemsSearch = document.getElementById("row-items-search")
+let searchTags=document.getElementById("tags-search")
+let  IngredientDetailsiSearch=document.getElementById("Ingredient-details-search")
+let itemDetailsiSearch = document.getElementById("row-items-details-search")
 
 // global var 
 
@@ -53,7 +57,6 @@ $(btnCloseSideBar).click(function () {
 })
 // sideBar
 
-
 // categories
 async function categories() {
     let urlCategories = await fetch("https://www.themealdb.com/api/json/v1/1/categories.php").catch(error => console.log(error))
@@ -77,7 +80,6 @@ async function categories() {
 }
 categories()
 // categories
-
 
 // get data from category
 async function filterCtegory(categoryNme) {
@@ -126,25 +128,29 @@ async function getMealData(id) {
     let temp = "";
     let tempHome = ""
     let tempArea = ""
-    let tempiIngredients=""
+    let tempiIngredients = ""
+    let tempSearch=""
     for (var i = 0; i < tagNmeLength; i++) {
         temp += `<span class="p-2 rounded bg-danger text-white me-1 mb-3">` + tagNmae.split(",")[i] + `</span> `
         tempHome += `<span class="p-2 rounded bg-danger text-white me-1 mb-3">` + tagNmae.split(",")[i] + `</span> `
         tempArea += `<span class="p-2 rounded bg-danger text-white me-1 mb-3">` + tagNmae.split(",")[i] + `</span> `
         tempiIngredients += `<span class="p-2 rounded bg-danger text-white me-1 mb-3">` + tagNmae.split(",")[i] + `</span> `
+        tempSearch += `<span class="p-2 rounded bg-danger text-white me-1 mb-3">` + tagNmae.split(",")[i] + `</span> `
     }
 
     tagsCategory.innerHTML = temp
     homeTags.innerHTML = tempHome
     areaTags.innerHTML = tempArea
-    iIngredientsTags.innerHTML=tempiIngredients
+    iIngredientsTags.innerHTML = tempiIngredients
+    searchTags.innerHTML=tempSearch
     // display tag name in html
 
     // display meal Ingredient in html
     let temp2 = ""
     let tempHome1 = ""
     let tempArea1 = ""
-    let tempiIngredients1=""
+    let tempiIngredients1 = ""
+    let tempSearch1=""
     for (var i = 1; i < 20; i++) {
         if (myMealData.meals[0][`strIngredient${i}`] != "" && myMealData.meals[0][`strMeasure${i}`] != "") {
             temp2 += `
@@ -159,12 +165,16 @@ async function getMealData(id) {
             tempiIngredients1 += `
             <span  class="p-2 me-1 mb-3"> `+ myMealData.meals[0][`strMeasure${i}`] + " " + myMealData.meals[0][`strIngredient${i}`] + `   </span>
             `
+            tempSearch1 += `
+            <span  class="p-2 me-1 mb-3"> `+ myMealData.meals[0][`strMeasure${i}`] + " " + myMealData.meals[0][`strIngredient${i}`] + `   </span>
+            `
         }
     }
     IngredientDetailsCategory.innerHTML = temp2
     IngredientDetailsHome.innerHTML = tempHome1
     IngredientDetailsArea.innerHTML = tempArea1
-    IngredientDetailsiIngredients.innerHTML=tempiIngredients1
+    IngredientDetailsiIngredients.innerHTML = tempiIngredients1
+    IngredientDetailsiSearch.innerHTML=tempSearch1
     // display meal Ingredient in html
 
     // display category item details data in html
@@ -205,6 +215,16 @@ async function getMealData(id) {
     document.getElementById("meal-iIngredients-iIngredients").innerHTML = "Area : " + myMealData.meals[0].strArea
     document.getElementById("youtube-link-iIngredients").setAttribute("href", myMealData.meals[0].strYoutube)
     document.getElementById("source-iIngredients").setAttribute("href", myMealData.meals[0].strSource)
+    // display  iIngredients item details data in html
+
+    // display iIngredients  item details data in html
+    document.getElementById("meal-name-search").innerHTML = myMealData.meals[0].strMeal
+    document.getElementById("item-search-name").innerHTML = myMealData.meals[0].strCategory
+    document.getElementById("item-img-details-search").setAttribute("src", myMealData.meals[0].strMealThumb)
+    document.getElementById("meal-desc-search").innerHTML = myMealData.meals[0].strInstructions
+    document.getElementById("meal-search-search").innerHTML = "Area : " + myMealData.meals[0].strArea
+    document.getElementById("youtube-link-search").setAttribute("href", myMealData.meals[0].strYoutube)
+    document.getElementById("source-search").setAttribute("href", myMealData.meals[0].strSource)
     // display  iIngredients item details data in html
 
 }
@@ -360,7 +380,7 @@ async function Ingredients() {
     // dispaly Ingredients in html
     for (var i = 0; i < 20; i++) {
 
-// get Ingredients name and handle it if name more than on word
+        // get Ingredients name and handle it if name more than on word
         var IngredientsName = myIngredientsData.meals[i].strIngredient
         var IngredientsLastName = IngredientsName.split(" ")[2]
         if (IngredientsName.split(" ").length >= 2) {
@@ -389,49 +409,46 @@ async function getDataIngredients(IngredientsName) {
     let myIngredientsData = await myIngredientsDataUrl.json()
 
 
-
     // make number of items equal 20
     if (myIngredientsData.meals.length > 20) {
         myIngredientsData.meals.length = 20
     }
     // make number of items equal 20
 
-      // display data in Ingredients  page items
-      temp = ""
-      for (var i = 0; i <  myIngredientsData.meals.length ; i++) {
-          temp += `
-          <div id=`+myIngredientsData.meals[i].idMeal+`  class="col-md-3 col-12">
-          <div id=`+myIngredientsData.meals[i].idMeal+`   class="position-relative m-2 ">
-              <img id=`+myIngredientsData.meals[i].idMeal+`  src=` + myIngredientsData.meals[i].strMealThumb + ` class="w-100" alt="items Ingredients">
-              <div id=`+myIngredientsData.meals[i].idMeal+`  class="layer">
-                  <h5 id=`+myIngredientsData.meals[i].idMeal+` class="text-start">`+ myIngredientsData.meals[i].strMeal+`</h5>
+    // display data in Ingredients  page items
+    temp = ""
+    for (var i = 0; i < myIngredientsData.meals.length; i++) {
+        temp += `
+          <div id=`+ myIngredientsData.meals[i].idMeal + `  class="col-md-3 col-12">
+          <div id=`+ myIngredientsData.meals[i].idMeal + `   class="position-relative m-2 ">
+              <img id=`+ myIngredientsData.meals[i].idMeal + `  src=` + myIngredientsData.meals[i].strMealThumb + ` class="w-100" alt="items Ingredients">
+              <div id=`+ myIngredientsData.meals[i].idMeal + `  class="layer">
+                  <h5 id=`+ myIngredientsData.meals[i].idMeal + ` class="text-start">` + myIngredientsData.meals[i].strMeal + `</h5>
               </div>
           </div>
       </div>
          `
-      }
-      itemsIngredients.innerHTML = temp
-      // display data in Ingredients  page items
+    }
+    itemsIngredients.innerHTML = temp
+    // display data in Ingredients  page items
 }
 // Ingredients items
-
 
 // send the id item to getDataIngredients() to get data 
 IngredientsRow.addEventListener("click", function (e) {
     getDataIngredients(e.target.id)
-    this.style.display="none"
+    this.style.display = "none"
     itemsIngredients.classList.remove("d-none")
 })
 // send the id item to getDataIngredients() to get data 
 
-
 // click on Ingredients ancor to get Ingredients name 
 function getIngredients() {
     if (IngredientsRow.style.display == "none") {
-        IngredientsRow.style.display="flex"
+        IngredientsRow.style.display = "flex"
         itemsIngredients.classList.add("d-none")
-   itemDetailsiIngredients.classList.add("d-none")
-        
+        itemDetailsiIngredients.classList.add("d-none")
+
     }
 }
 // click on Ingredients ancor to get Ingredients name
@@ -439,60 +456,123 @@ function getIngredients() {
 // send the id item to getMealData() to get data 
 itemsIngredients.addEventListener("click", function (e) {
     getMealData(e.target.id)
-   console.log(e.target.id);
-   this.classList.add("d-none")
-   itemDetailsiIngredients.classList.remove("d-none")
+    console.log(e.target.id);
+    this.classList.add("d-none")
+    itemDetailsiIngredients.classList.remove("d-none")
 
 })
 // send the id item to getMealData() to get data 
 
 
+// search by name
+async function searchName(name) {
+    let mySearchNameUrl = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${name}`).catch(error => console.log(error))
+    let mySearchNamedata = await mySearchNameUrl.json()
 
+    // make number of items equal 20
+    if (mySearchNamedata.meals.length > 20) {
+        mySearchNamedata.meals.length = 20
+    }
+    // make number of items equal 20
 
-
-
-async function searchName(name){
-    let mySearchNameUrl= await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${name}`).catch(error=>console.log(error))
-    let mySearchNamedata= await mySearchNameUrl.json()
-    console.log(mySearchNamedata.meals);
-
-
-        // make number of items equal 20
-        if (mySearchNamedata.meals.length > 20) {
-            mySearchNamedata.meals.length = 20
-        }
-        // make number of items equal 20
-
-
- let temp=""
- for(var i=0;i< mySearchNamedata.meals.length;i++){
-    
- }
+    // display data in search  page items
+    temp = ""
+    for (var i = 0; i < mySearchNamedata.meals.length; i++) {
+        temp += `
+         <div id=`+ mySearchNamedata.meals[i].idMeal + `  class="col-md-3 col-12">
+         <div id=`+ mySearchNamedata.meals[i].idMeal + `   class="position-relative m-2 ">
+             <img id=`+ mySearchNamedata.meals[i].idMeal + `  src=` + mySearchNamedata.meals[i].strMealThumb + ` class="w-100" alt="items search">
+             <div id=`+ mySearchNamedata.meals[i].idMeal + `  class="layer">
+                 <h5 id=`+ mySearchNamedata.meals[i].idMeal + ` class="text-start">` + mySearchNamedata.meals[i].strMeal + `</h5>
+             </div>
+         </div>
+     </div>`
+     }
+    itemsSearch.innerHTML = temp
+    // display data in area  search items
 
 }
+// search by name
 
-
-
-
-
-
-
-inputSearchName.addEventListener("blur",function(){
+// send the name to  searchName()
+inputSearchName.addEventListener("keyup", function () {
     searchName(inputSearchName.value)
+    inputSearchFirst.value = ""
+    if (inputSearchName.value == "") {
+        itemsSearch.style.display = "none"
+    } else {
+        itemsSearch.style.display = "flex"
+    }
 })
+// send the name to  searchName()
+
+// search by first letter
+async function searchLetter(letter) {
+    let mySearchLetterUrl = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?f=${letter}`).catch(error => console.log(error))
+    let mySearchLetterdata = await mySearchLetterUrl.json()
+
+    // make number of items equal 20
+    if (mySearchLetterdata.meals.length > 20) {
+        mySearchLetterdata.meals.length = 20
+    }
+    // make number of items equal 20
+
+    // display data in search  page items
+    temp = ""
+    for (var i = 0; i < mySearchLetterdata.meals.length; i++) {
+        temp += `
+         <div id=`+ mySearchLetterdata.meals[i].idMeal + `  class="col-md-3 col-12">
+         <div id=`+ mySearchLetterdata.meals[i].idMeal + `   class="position-relative m-2 ">
+             <img id=`+ mySearchLetterdata.meals[i].idMeal + `  src=` + mySearchLetterdata.meals[i].strMealThumb + ` class="w-100" alt="items search">
+             <div id=`+ mySearchLetterdata.meals[i].idMeal + `  class="layer">
+                 <h5 id=`+ mySearchLetterdata.meals[i].idMeal + ` class="text-start">` + mySearchLetterdata.meals[i].strMeal + `</h5>
+             </div>
+         </div>
+     </div> `
+    }
+    itemsSearch.innerHTML = temp
+    // display data in area  search items
+}
+// search by firrst letter
 
 
+// sent the first letter to searchLetter()
+inputSearchFirst.addEventListener("keyup", function () {
+    searchLetter(inputSearchFirst.value)
+    inputSearchName.value = ""
+    if (inputSearchFirst.value == "") {
+        itemsSearch.style.display = "none"
+    } else {
+        itemsSearch.style.display = "flex"
+    }
+})
+// sent the first letter to searchLetter()
 
 
+// send the id item to getMealData() to get data 
+itemsSearch.addEventListener("click", function (e) {
+    getMealData(e.target.id)
+    this.style.display = "none"
+    inputSearchName.style.display = "none"
+    inputSearchFirst.style.display = "none"
+    itemDetailsiSearch.classList.remove("d-none")
+})
+// send the id item to getMealData() to get data 
 
-// inputSearchFirst.addEventListener("keyup",function(){
-    
-// })
 
+// click on search ancor to get search page 
+function getSearch() {
+    if (inputSearchName.style.display == "none") {
+        inputSearchName.style.display = "flex"
+        inputSearchFirst.style.display = "flex"
+        itemsSearch.style.display = "none"
+        inputSearchFirst.value = ""
+        inputSearchName.value = ""
+    itemDetailsiSearch.classList.add("d-none")
 
-
-
-
+    }
+}
+// click on search ancor to get search page
 
 
 
