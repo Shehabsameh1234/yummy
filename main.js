@@ -23,6 +23,8 @@ let itemsIngredients =document.getElementById("row-items-Ingredients")
 let itemDetailsiIngredients = document.getElementById("row-items-details-iIngredients")
 let iIngredientsTags=document.getElementById("tags-iIngredients")
 let IngredientDetailsiIngredients=document.getElementById("Ingredient-details-iIngredients")
+let inputSearchName=document.getElementById("search-name")
+let inputSearchFirst=document.getElementById("search-first")
 
 // global var 
 
@@ -386,7 +388,7 @@ async function getDataIngredients(IngredientsName) {
     let myIngredientsDataUrl = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${IngredientsName}`).catch(error => console.log(error))
     let myIngredientsData = await myIngredientsDataUrl.json()
 
-    console.log(myIngredientsData);
+
 
     // make number of items equal 20
     if (myIngredientsData.meals.length > 20) {
@@ -449,10 +451,43 @@ itemsIngredients.addEventListener("click", function (e) {
 
 
 
+async function searchName(name){
+    let mySearchNameUrl= await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${name}`).catch(error=>console.log(error))
+    let mySearchNamedata= await mySearchNameUrl.json()
+    console.log(mySearchNamedata.meals);
+
+
+        // make number of items equal 20
+        if (mySearchNamedata.meals.length > 20) {
+            mySearchNamedata.meals.length = 20
+        }
+        // make number of items equal 20
+
+
+ let temp=""
+ for(var i=0;i< mySearchNamedata.meals.length;i++){
+    
+ }
+
+}
 
 
 
 
+
+
+
+inputSearchName.addEventListener("blur",function(){
+    searchName(inputSearchName.value)
+})
+
+
+
+
+
+// inputSearchFirst.addEventListener("keyup",function(){
+    
+// })
 
 
 
