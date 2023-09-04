@@ -33,7 +33,7 @@ let itemDetailsiSearch = document.getElementById("row-items-details-search")
 
 // loading spiner
 $(document).ready(function () {
-    $("#loading").fadeOut(7000)
+    $("#loading").fadeOut(10000)
 });
 // loading spiner
 
