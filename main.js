@@ -33,7 +33,7 @@ let itemDetailsiSearch = document.getElementById("row-items-details-search")
 
 // loading spiner
 $(document).ready(function () {
-    $("#loading").fadeOut(7000)
+    $("#loading").fadeOut(4000)
 });
 // loading spiner
 
@@ -58,7 +58,7 @@ $(btnCloseSideBar).click(function () {
 
 // categories
 async function categories() {
-    let urlCategories = await fetch("https://www.themealdb.com/api/json/v1/1/categories.php").catch(error => console.log(error))
+    let urlCategories = await fetch("https://www.themealdb.com/api/json/v1/1/categories.php").catch(error => alert(error))
     let categoriesData = await urlCategories.json()
     let temp = "";
     // dispaly categories in html
@@ -83,7 +83,7 @@ categories()
 // get data from category
 async function filterCtegory(categoryNme) {
 
-    let myFilterCtegory = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${categoryNme}`).catch(error => console.log(error))
+    let myFilterCtegory = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${categoryNme}`).catch(error => alert(error))
     let myFilterCtegoryDate = await myFilterCtegory.json()
 
     // make number of items equal 20
@@ -114,7 +114,7 @@ async function filterCtegory(categoryNme) {
 // get meal data
 async function getMealData(id) {
 
-    let myMealDetails = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`).catch(error => console.log(error))
+    let myMealDetails = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`).catch(error => alert(error))
     let myMealData = await myMealDetails.json()
     let tagNmae = myMealData.meals[0].strTags
     // get tag name and if it == null write no tag
@@ -259,7 +259,7 @@ function getCategory() {
 
 // home page
 async function homePage() {
-    let myhomePageUrl = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=`).catch(error => console.log(error))
+    let myhomePageUrl = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=`).catch(error => alert(error))
     let myHomeData = await myhomePageUrl.json()
 
     // display data in home page
@@ -293,7 +293,7 @@ itemsHome.addEventListener("click", function (e) {
 
 // areas name
 async function areasName() {
-    let myAreaName = await fetch("https://www.themealdb.com/api/json/v1/1/list.php?a=list").catch(error => console.log(error))
+    let myAreaName = await fetch("https://www.themealdb.com/api/json/v1/1/list.php?a=list").catch(error => alert(error))
     let myAreaNameData = await myAreaName.json()
     let temp = "";
     // dispaly areas in html
@@ -313,7 +313,7 @@ areasName()
 
 // area items
 async function getDataArea(areaName) {
-    let myAreaDataUrl = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?a=${areaName}`).catch(error => console.log(error))
+    let myAreaDataUrl = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?a=${areaName}`).catch(error => alert(error))
     let myAreaData = await myAreaDataUrl.json()
 
     console.log(myAreaData.meals[0].idMeal);
@@ -372,7 +372,7 @@ itemsArea.addEventListener("click", function (e) {
 
 // Ingredients
 async function Ingredients() {
-    let myIngredientsName = await fetch("https://www.themealdb.com/api/json/v1/1/list.php?i=list").catch(error => console.log(error))
+    let myIngredientsName = await fetch("https://www.themealdb.com/api/json/v1/1/list.php?i=list").catch(error => alert(error))
     let myIngredientsData = await myIngredientsName.json()
 
     let temp = "";
@@ -404,7 +404,7 @@ Ingredients()
 
 // Ingredients items
 async function getDataIngredients(IngredientsName) {
-    let myIngredientsDataUrl = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${IngredientsName}`).catch(error => console.log(error))
+    let myIngredientsDataUrl = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${IngredientsName}`).catch(error => alert(error))
     let myIngredientsData = await myIngredientsDataUrl.json()
 
 
@@ -465,7 +465,7 @@ itemsIngredients.addEventListener("click", function (e) {
 
 // search by name
 async function searchName(name) {
-    let mySearchNameUrl = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${name}`).catch(error => console.log(error))
+    let mySearchNameUrl = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${name}`).catch(error => alert(error))
     let mySearchNamedata = await mySearchNameUrl.json()
 
     // make number of items equal 20
@@ -507,7 +507,7 @@ inputSearchName.addEventListener("keyup", function () {
 
 // search by first letter
 async function searchLetter(letter) {
-    let mySearchLetterUrl = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?f=${letter}`).catch(error => console.log(error))
+    let mySearchLetterUrl = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?f=${letter}`).catch(error => alert(error))
     let mySearchLetterdata = await mySearchLetterUrl.json()
 
     // make number of items equal 20
